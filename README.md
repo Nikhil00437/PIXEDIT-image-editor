@@ -73,9 +73,9 @@ The code has been tested on Windows 10/11, macOS 13 and Ubuntu 22.04.
 
 ---  
 
-## Installation
+# Installation
 
-# Method 1: Running Manually
+## Method 1: Running Manually
 
 1. **Clone the repository**  
 
@@ -115,7 +115,7 @@ The code has been tested on Windows 10/11, macOS 13 and Ubuntu 22.04.
    Pillow>=8.0
    ```
 
-# Method 2: Using the exe file
+## Method 2: Using the exe file
 
 Just install and run the exe file attached.
 
