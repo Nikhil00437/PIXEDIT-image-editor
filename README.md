@@ -1,6 +1,6 @@
 
 
-# 📸 Basic Image Editor  
+# 📸 PIXEDIT | A Basic Image Editor  
 *A lightweight PyQt5‑based image editor with crop, transform, filters and simple undo/redo.*
 
 ---
