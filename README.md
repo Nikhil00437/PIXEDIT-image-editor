@@ -75,6 +75,8 @@ The code has been tested on Windows 10/11, macOS 13 and Ubuntu 22.04.
 
 ## Installation
 
+# Method 1: Running Manually
+
 1. **Clone the repository**  
 
    ```bash
@@ -113,7 +115,12 @@ The code has been tested on Windows 10/11, macOS 13 and Ubuntu 22.04.
    Pillow>=8.0
    ```
 
-4. (Optional) **Install development tools** for linting or testing if you plan to contribute.
+# Method 2: Using the exe file
+
+Just install and run the exe file attached.
+
+> Note:
+> The Code is not Signed, so the windows defender can show warning when opened for the first time. 
 
 ---  
 
