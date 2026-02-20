@@ -130,7 +130,7 @@ Just install and run the exe file attached.
 2. Launch the editor:
 
    ```bash
-   python main.py
+   python app.py
    ```
 
    The program opens a window titled **Image Editor**.  
@@ -205,15 +205,13 @@ The **PREVIEW** combo box lets you temporarily view any operation on the origina
 ```
 basic-image-editor/
 │
-├─ main.py                # Entry point – UI assembly & signal wiring
+├─ app.py                # Entry point – UI assembly & signal wiring  (this is without the ui we know now ofcourse...)
 ├─ Crop.py                # Custom QLabel with rubber‑band cropping
 ├─ functions.py           # ImageEditor class – all logic (PIL, history, etc.)
-├─ requirements.txt       # Python dependencies (optional)
-└─ screenshots/
-   └─ demo.png           # Screenshot used in README
+└─ requirements.txt       # Python dependencies (optional)
 ```
 
-* **main.py** – builds the Qt layout, instantiates the editor, connects UI controls to `ImageEditor` methods.  
+* **app.py** – builds the Qt layout, instantiates the editor, connects UI controls to `ImageEditor` methods.  
 * **Crop.py** – overrides `QLabel` to add mouse‑tracking and `QRubberBand`‑based cropping.  
 * **functions.py** – contains the `ImageEditor` class, which:  
   * loads images,  
