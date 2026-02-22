@@ -1,11 +1,9 @@
-from PyQt5.QtWidgets import QApplication, QRubberBand, QWidget, QHBoxLayout, QSlider, QFileDialog, QGroupBox, QListWidget, QLabel, QVBoxLayout, QPushButton, QComboBox
-from PyQt5.QtCore import Qt, QRect, QSize, QPoint
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 import os, tempfile
 from PIL import Image, ImageFilter, ImageEnhance
 from collections import deque
-from Crop import CropLabel
-
 
 # All functions to use
 class ImageEditor:
