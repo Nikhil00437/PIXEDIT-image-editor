@@ -63,7 +63,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-After launching, the editor window opens and allows you to browse, edit, and save images. ([GitHub][1])
+After launching, the editor window opens and allows you to browse, edit, and save images.
 
 ---
 
@@ -81,7 +81,7 @@ After launching, the editor window opens and allows you to browse, edit, and sav
    * Brightness & contrast sliders
 5. **Crop** – Click *Crop*, drag to select, then confirm.
 6. **Undo/Redo** – Step back through edits.
-7. **Save** – Export work as PNG or JPEG. ([GitHub][1])
+7. **Save** – Export work as PNG or JPEG.
 
 ---
 
@@ -107,7 +107,7 @@ Potential improvements include:
 * ⌨️ Keyboard shortcuts for common actions
 * ⚡ Batch processing for multiple images
 * 📸 New filters (e.g., edge detection, color curves)
-* 📐 Advanced resizing and aspect-ratio tools ([GitHub][1])
+* 📐 Advanced resizing and aspect-ratio tools
 
 ---
 
@@ -128,13 +128,13 @@ Potential improvements include:
    ```
 5. Open a Pull Request
 
-Please follow PEP-8 style guidelines and update this README as needed. ([GitHub][1])
+Please follow PEP-8 style guidelines and update this README as needed.
 
 ---
 
 ## 📜 License
 
-This project is released under the **MIT License**. See the `LICENSE` file for details. ([GitHub][1])
+This project is released under the **MIT License**. See the `LICENSE` file for details.
 
 ---
 
