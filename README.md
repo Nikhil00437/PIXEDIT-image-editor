@@ -1,22 +1,20 @@
-
 # PIXEDIT — Image Editor 🖼️
 
-A basic yet functional GUI image editor built with **Python**, **PyQt5**, and **Pillow (PIL)**.  
-Designed for simple photo editing tasks like rotation, filters, cropping, brightness/contrast, and undo/redo support.
+**PIXEDIT** is a basic yet functional GUI image editor built with **Python**, **PyQt5**, and **Pillow (PIL)**. It’s designed to handle common photo editing tasks such as rotation, filters, cropping, brightness/contrast adjustments, and undo/redo support. :contentReference[oaicite:1]{index=1}
 
 ---
 
 ## 🚀 Features
 
-This editor lets you:
+This editor provides:
 
-- 📂 Load images from a folder and browse them
-- 🔄 Rotate, flip, and mirror images
-- 🖌️ Apply filters: **grayscale**, **blur**, **sharpen**
-- 🌗 Adjust **brightness** & **contrast**
-- ✂️ Crop using a rubber-band selection
-- ↩️ Undo up to 20 steps (history)
-- 💾 Save edited images as PNG or JPEG
+- 🗂️ Load and browse images from a folder  
+- 🔄 Rotate, flip, and mirror images  
+- 🎨 Apply filters: **grayscale**, **blur**, **sharpen**  
+- ⚙️ Adjust **brightness** & **contrast**  
+- ✂️ Crop images using a drag-select rubber-band tool  
+- ↩️ Undo up to 20 steps (history)  
+- 💾 Save edited images as **PNG** or **JPEG** :contentReference[oaicite:2]{index=2}
 
 ---
 
@@ -24,35 +22,34 @@ This editor lets you:
 
 | Requirement | Minimum Version |
 |-------------|-----------------|
-| Python      | 3.7             |
-| PyQt5       | 5.15            |
-| Pillow      | 8.0             |
+| Python      | 3.7+            |
+| PyQt5       | 5.15+           |
+| Pillow      | 8.0+            |
 
-> Tested on Windows 10/11, macOS 13, and Ubuntu 22.04. :contentReference[oaicite:1]{index=1}
+> Tested on **Windows 10/11**, **macOS 13**, and **Ubuntu 22.04**. :contentReference[oaicite:3]{index=3}
 
 ---
 
 ## 📦 Installation
 
-### Clone the repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/Nikhil00437/PIXEDIT-image-editor.git
 cd PIXEDIT-image-editor
 ````
 
-### (Recommended) Create a virtual environment
+> (Optional) Create and activate a virtual environment:
 
 ```bash
 python -m venv venv
-# Activate the environment:
-# Windows:
+# Windows
 venv\Scripts\activate
-# macOS / Linux:
+# macOS / Linux
 source venv/bin/activate
 ```
 
-### Install dependencies
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -60,72 +57,85 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Run the Editor
-
-After dependencies are installed:
+## ▶️ Running the Editor
 
 ```bash
 python app.py
 ```
 
-The editor window should open, letting you browse and edit images.
+After launching, the editor window opens and allows you to browse, edit, and save images. ([GitHub][1])
 
 ---
 
 ## 🧭 Usage Walk-through
 
-1. **Open a Folder** – Select a directory containing `.jpg`, `.jpeg`, or `.png` files.
-2. **Load an Image** – Click on any filename to display it.
-3. **Apply Transformations**
+1. **Open a Folder** – Pick a directory with `.jpg`, `.jpeg`, or `.png` files.
+2. **Load an Image** – Select an image to display it.
+3. **Apply Transformations** –
 
    * Rotate left/right
    * Mirror horizontally/vertically
-4. **Filters & Adjustments**
+4. **Filters & Adjustments** –
 
    * Grayscale, blur, sharpen
    * Brightness & contrast sliders
-5. **Crop** – Click Crop → drag to select → confirm.
-6. **Undo/Redo** – Step back through changes.
-7. **Save** – Export to PNG or JPEG.
+5. **Crop** – Click *Crop*, drag to select, then confirm.
+6. **Undo/Redo** – Step back through edits.
+7. **Save** – Export work as PNG or JPEG. ([GitHub][1])
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
 ```
 PIXEDIT-image-editor/
 ├── app.py            # Main application entry point
 ├── Crop.py           # Rubber-band cropping widget
-├── functions.py      # Core image operations (Pillow + history)
+├── functions.py      # Core image logic (Pillow + history)
 ├── requirements.txt  # Python dependencies
 ├── README.md         # This documentation
 ```
 
+([GitHub][1])
+
 ---
 
-## 🔧 Future Enhancements
+## 🚧 Future Enhancements
 
-* 🎛️ Keyboard shortcuts for common actions
-* 🗂️ Batch editing for multiple images
-* 🖼️ Additional filters (e.g., edge detection, color curves)
-* 🌗 Light & dark UI themes
-* 📐 Advanced resizing and aspect-ratio tools
+Potential improvements include:
+
+* ⌨️ Keyboard shortcuts for common actions
+* ⚡ Batch processing for multiple images
+* 📸 New filters (e.g., edge detection, color curves)
+* 📐 Advanced resizing and aspect-ratio tools ([GitHub][1])
 
 ---
 
 ## 🤝 Contributing
 
 1. Fork the repo
-2. Create a branch: `git checkout -b feature/YourFeature`
-3. Implement your changes
-4. Commit: `git commit -am "Add feature"`
-5. Push & open a Pull Request
+2. Create a feature branch
 
-Please follow consistent style (PEP-8) and update this README if behavior changes.
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Implement and test your changes
+4. Commit and push
+
+   ```bash
+   git commit -am "Add feature"
+   git push origin feature/YourFeature
+   ```
+5. Open a Pull Request
+
+Please follow PEP-8 style guidelines and update this README as needed. ([GitHub][1])
 
 ---
 
 ## 📜 License
 
-This project is released under the **MIT License** — see the `LICENSE` file for details.
+This project is released under the **MIT License**. See the `LICENSE` file for details. ([GitHub][1])
 
+---
+
+✨ *Thanks for checking out PIXEDIT — Image Editor!* 🎉
