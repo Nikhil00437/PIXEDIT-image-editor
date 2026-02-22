@@ -1,6 +1,6 @@
 # PIXEDIT — Image Editor 🖼️
 
-**PIXEDIT** is a basic yet functional GUI image editor built with **Python**, **PyQt5**, and **Pillow (PIL)**. It’s designed to handle common photo editing tasks such as rotation, filters, cropping, brightness/contrast adjustments, and undo/redo support. :contentReference[oaicite:1]{index=1}
+**PIXEDIT** is a basic yet functional GUI image editor built with **Python**, **PyQt5**, and **Pillow (PIL)**. It’s designed to handle common photo editing tasks such as rotation, filters, cropping, brightness/contrast adjustments, and undo/redo support.
 
 ---
 
@@ -14,7 +14,7 @@ This editor provides:
 - ⚙️ Adjust **brightness** & **contrast**  
 - ✂️ Crop images using a drag-select rubber-band tool  
 - ↩️ Undo up to 20 steps (history)  
-- 💾 Save edited images as **PNG** or **JPEG** :contentReference[oaicite:2]{index=2}
+- 💾 Save edited images as **PNG** or **JPEG**
 
 ---
 
@@ -26,7 +26,7 @@ This editor provides:
 | PyQt5       | 5.15+           |
 | Pillow      | 8.0+            |
 
-> Tested on **Windows 10/11**, **macOS 13**, and **Ubuntu 22.04**. :contentReference[oaicite:3]{index=3}
+> Tested on **Windows 10/11**, **macOS 13**, and **Ubuntu 22.04**.
 
 ---
 
