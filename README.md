@@ -62,6 +62,17 @@ This editor provides:
 
 ## 📦 Installation
 
+### Method 1:
+
+Installing the .exe file from the releases...
+
+>Note :
+>Note that the code is not signed so the windows defender can show you a warning when you first run the .exe file
+
+### Method 2:
+
+Manual running:
+
 Clone the repository:
 
 ```bash
@@ -125,8 +136,6 @@ PIXEDIT-image-editor/
 ├── requirements.txt  # Python dependencies
 ├── README.md         # This documentation
 ```
-
-([GitHub][1])
 
 ---
 
