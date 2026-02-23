@@ -65,7 +65,6 @@ This editor provides:
 ### Method 1:
 
 Installing the .exe file from the releases...
-https://github.com/Nikhil00437/PIXEDIT-image-editor/releases/tag/1.0.1
 
 >Note :
 >Note that the code is not signed so the windows defender can show you a warning when you first run the .exe file
