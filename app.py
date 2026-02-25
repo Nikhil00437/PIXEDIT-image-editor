@@ -1,9 +1,10 @@
-from PyQt5.QtWidgets import (QApplication, QWidget, QHBoxLayout, QSlider, QGroupBox,
-                             QListWidget, QLabel, QVBoxLayout, QPushButton, QComboBox)
+from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QSlider, QGroupBox, QListWidget, QLabel, QVBoxLayout, QPushButton, QComboBox, QListWidgetItem
 from PyQt5.QtCore import Qt
 import os, sys
 from Crop import CropLabel
 from functions import ImageEditor
+
+SUPPORTED_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tiff", ".webp"}
 
 os.environ["QT_LOGGING_RULES"] = "*.debug=false;qt.qpa.*=false"
 app = QApplication(sys.argv)
@@ -65,6 +66,7 @@ def dark_theme(accent, accent_hover, accent_pressed,
     QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0px; }}
     QLabel#footer {{ color: #333333; font-size: 10px; letter-spacing: 1px; border-top: 1px solid {groupbox}; padding-top: 4px; }}
     QLabel#divlabel {{ color: {border}; font-size: 9px; letter-spacing: 3px; padding-top: 6px; }}
+    QLabel#image_label {{ background-color: {canvas}; border: 1px solid {divider_color}; }}
 """
 
 def light_theme(accent, accent_hover, accent_pressed,
@@ -123,8 +125,8 @@ def light_theme(accent, accent_hover, accent_pressed,
     QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0px; }}
     QLabel#footer {{ color: {border}; font-size: 10px; letter-spacing: 1px; border-top: 1px solid {divider_color}; padding-top: 4px; }}
     QLabel#divlabel {{ color: {border}; font-size: 9px; letter-spacing: 3px; padding-top: 6px; }}
+    QLabel#image_label {{ background-color: {canvas}; border: 1px solid {divider_color}; }}
 """
-
 # 5 Themes
 THEMES = {
     "⬛  MIDNIGHT GOLD": dark_theme(
@@ -244,7 +246,7 @@ main_window = QWidget()
 main_window.setWindowFlags(Qt.FramelessWindowHint | Qt.Window)
 main_window.resize(1100, 820)
 
-# build UI
+# build UI 
 title_bar = TitleBar(main_window)
 
 footer = QLabel("© PIXEDIT  ·  Basic Image Editing  ·  Made by Nikhil 🫡")
@@ -265,6 +267,7 @@ folder = QPushButton("⊕  Select Folder")
 folder.setObjectName("folder_btn")
 
 widget = QListWidget()
+# widget.setFixedHeight(100)
 
 preview = QComboBox()
 preview.setEditable(True)
@@ -294,6 +297,11 @@ grayscale       = QPushButton("◑  B/W")
 color           = QPushButton("◈  Color")
 blur            = QPushButton("≋  Blur")
 sharpen         = QPushButton("✦  Sharpen")
+sepia           = QPushButton("▮  Sepia")
+invert          = QPushButton("₪  Invert")
+solarize        = QPushButton("●  Solarize")
+emboss          = QPushButton("▩  Emboss")
+vignette        = QPushButton("◌◌  Vignette")
 
 brightness = QGroupBox("BRIGHTNESS")
 slider = QSlider(Qt.Horizontal)
@@ -334,6 +342,12 @@ vboxmain.addWidget(sharpen)
 vboxmain.addWidget(divider("ADJUST"))
 vboxmain.addWidget(brightness)
 vboxmain.addWidget(contrast)
+vboxmain.addWidget(divider("NEW FEATURES"))
+vboxmain.addWidget(sepia)
+vboxmain.addWidget(solarize)
+vboxmain.addWidget(invert)
+vboxmain.addWidget(emboss)
+vboxmain.addWidget(vignette)
 
 save = QPushButton("⬇  Save")
 save.setObjectName("save_btn")
@@ -416,18 +430,27 @@ root_layout.addWidget(title_bar)
 root_layout.addWidget(content)
 
 # wire up ImageEditor
-main = ImageEditor(widget, image_label, slider, slider2, preview, left_rotate, right_rotate,
-                   flip_horizontal, flip_vertical, grayscale, color, blur, sharpen,
-                   brightness, contrast, undo, reset, crop_start, crop_confirm, save, main_window)
-
+main = ImageEditor(widget, image_label, slider, slider2, preview, left_rotate, right_rotate, flip_horizontal, flip_vertical, grayscale, color, blur, sharpen, brightness, contrast, sepia, solarize, invert, emboss, vignette, undo, reset, crop_start, crop_confirm, save, main_window)
+main.setup_shortcuts()
 # Disable until image loaded
-for w in [preview, left_rotate, right_rotate, flip_horizontal, flip_vertical,
-          grayscale, color, blur, sharpen, brightness, contrast,
-          undo, reset, crop_start, crop_confirm, save]:
+for w in [preview, left_rotate, right_rotate, flip_horizontal, flip_vertical, grayscale, color, blur, sharpen, brightness, contrast, sepia, solarize, invert, emboss, vignette, undo, reset, crop_start, crop_confirm, save]:
     w.setEnabled(False)
 
 folder.clicked.connect(main.getfiles)
-widget.currentItemChanged.connect(main.load_image)
+
+def _on_item_changed(current, previous):
+    if current is None: return
+    full_path = current.data(Qt.UserRole)
+    if full_path and os.path.isfile(full_path):
+        # Temporarily swap item text to full path so load_image can open it,
+        # then restore the basename display name
+        current.setText(full_path)
+        main.load_image()
+        current.setText(os.path.basename(full_path))
+    else:
+        main.load_image()
+
+widget.currentItemChanged.connect(_on_item_changed)
 
 left_rotate.clicked.connect(main.left_rotate_filter)
 right_rotate.clicked.connect(main.right_rotate_filter)
@@ -442,11 +465,91 @@ slider.sliderReleased.connect(main.brightness_filter)
 slider2.sliderReleased.connect(main.contrast_filter)
 preview.currentIndexChanged.connect(main.display_image_choice)
 
+sepia.clicked.connect(main.sepia)
+solarize.clicked.connect(main.solarize)
+invert.clicked.connect(main.invert)
+emboss.clicked.connect(main.emboss)
+vignette.clicked.connect(main.vignette)
+
 undo.clicked.connect(main.undo_)
 reset.clicked.connect(main.reset_)
 save.clicked.connect(main.save_image)
 crop_start.clicked.connect(main.start_crop)
 crop_confirm.clicked.connect(main.confirm_crop)
+#  DRAG & DROP
+def _load_images_from_paths(paths):
+    image_files = []
+    for path in paths:
+        path = path.strip()
+        if os.path.isdir(path):
+            # Dropped a folder — grab all supported images inside it
+            for f in sorted(os.listdir(path)):
+                if os.path.splitext(f)[1].lower() in SUPPORTED_EXTS:
+                    image_files.append(os.path.join(path, f))
+        elif os.path.isfile(path) and os.path.splitext(path)[1].lower() in SUPPORTED_EXTS:
+            image_files.append(path)
+    if not image_files: return
+    # Populate the list widget (same pattern as ImageEditor.getfiles)
+    widget.clear()
+    for filepath in image_files:
+        item = QListWidgetItem(os.path.basename(filepath))
+        item.setData(Qt.UserRole, filepath)   # store full path in UserRole
+        widget.addItem(item)
+    # Select and load the first image
+    widget.setCurrentRow(0)
+
+def _enable_drop_on(w):
+    w.setAcceptDrops(True)
+    def drag_enter(event):
+        if event.mimeData().hasUrls():
+            # Accept only if at least one URL is a supported file or directory
+            for url in event.mimeData().urls():
+                p = url.toLocalFile()
+                if os.path.isdir(p) or os.path.splitext(p)[1].lower() in SUPPORTED_EXTS:
+                    event.acceptProposedAction()
+                    return
+        event.ignore()
+
+    def drop(event):
+        paths = [url.toLocalFile() for url in event.mimeData().urls()]
+        _load_images_from_paths(paths)
+        event.acceptProposedAction()
+
+    w.dragEnterEvent = drag_enter
+    w.dropEvent = drop
+
+# Enable drop on the canvas
+_enable_drop_on(image_label)
+
+# Visual hint on the canvas while dragging over it
+_orig_drag_move = image_label.dragMoveEvent if hasattr(image_label, "dragMoveEvent") else None
+
+def _canvas_drag_enter(event):
+    if event.mimeData().hasUrls():
+        for url in event.mimeData().urls():
+            p = url.toLocalFile()
+            if os.path.isdir(p) or os.path.splitext(p)[1].lower() in SUPPORTED_EXTS:
+                image_label.setStyleSheet(
+                    image_label.styleSheet() +
+                    " QLabel#image_label { border: 2px dashed #C8A96E; }"
+                )
+                event.acceptProposedAction()
+                return
+    event.ignore()
+
+def _canvas_drag_leave(event):
+    # Strip the dashed border hint — re-apply theme to reset
+    apply_theme(current_theme[0])
+
+def _canvas_drop(event):
+    apply_theme(current_theme[0])   # reset border first
+    paths = [url.toLocalFile() for url in event.mimeData().urls()]
+    _load_images_from_paths(paths)
+    event.acceptProposedAction()
+
+image_label.dragEnterEvent = _canvas_drag_enter
+image_label.dragLeaveEvent = _canvas_drag_leave
+image_label.dropEvent       = _canvas_drop
 
 main_window.show()
 app.exec_()
