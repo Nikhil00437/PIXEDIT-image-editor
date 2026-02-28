@@ -1,180 +1,162 @@
 # PIXEDIT — Image Editor 🖼️
 
-**PIXEDIT** is a basic yet functional GUI image editor built with **Python**, **PyQt5**, and **Pillow (PIL)**. It’s designed to handle common photo editing tasks such as rotation, filters, cropping, brightness/contrast adjustments, and undo/redo support.
+> A clean, themeable desktop image editor built with Python, PyQt5, and Pillow.
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)](https://python.org)
+[![PyQt5](https://img.shields.io/badge/PyQt5-GUI-green?style=flat-square)](https://pypi.org/project/PyQt5/)
+[![Pillow](https://img.shields.io/badge/Pillow-PIL-orange?style=flat-square)](https://pillow.readthedocs.io/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE.txt)
 
 ---
 
-## 🚀 Features
+## Demo
 
-This editor provides:
-
-- 🗂️ Load and browse images from a folder  
-- 🔄 Rotate, flip, and mirror images  
-- 🎨 Apply filters: **grayscale**, **blur**, **sharpen**  
-- ⚙️ Adjust **brightness** & **contrast**  
-- ✂️ Crop images using a drag-select rubber-band tool  
-- ↩️ Undo up to 20 steps (history)  
-- 💾 Save edited images as **PNG** or **JPEG**
+![PIXEDIT3](https://github.com/user-attachments/assets/0ee4c948-3106-4b13-a57a-084fcee28387)
 
 ---
 
----
+## ✨ Features
 
-## 🖼️ ScreenShots
+**Image Loading**
+- Browse and load images from any folder via a file picker or drag & drop directly onto the canvas
+- Supports `.jpg`, `.jpeg`, and `.png` formats
+- Sidebar file list for quick navigation between images
 
-<img width="1920" height="1080" alt="Screenshot (143)" src="https://github.com/user-attachments/assets/ccbcc8b4-4ca1-497e-a4c2-8e8c8279b7f7" />
-<img width="1920" height="1080" alt="Screenshot (144)" src="https://github.com/user-attachments/assets/8f5bdc45-d15a-4049-9523-ed041c89163e" />
-<img width="1920" height="1080" alt="Screenshot (145)" src="https://github.com/user-attachments/assets/1459c79f-6e47-4709-b76b-c8f7d753fd19" />
-<img width="1920" height="1080" alt="Screenshot (146)" src="https://github.com/user-attachments/assets/dbf230fd-21d2-404a-807d-04533861cd02" />
-<img width="1920" height="1080" alt="Screenshot (147)" src="https://github.com/user-attachments/assets/258bf360-5e2e-42c4-bdcf-0ee33f36154c" />
-<img width="1920" height="1080" alt="Screenshot (148)" src="https://github.com/user-attachments/assets/d37a61a7-4565-4785-b53f-fe04f74c9b78" />
-<img width="1920" height="1080" alt="Screenshot (149)" src="https://github.com/user-attachments/assets/468b5fe8-2460-4731-a2c4-43951c0ec6a9" />
-<img width="1920" height="1080" alt="Screenshot (150)" src="https://github.com/user-attachments/assets/47d34aed-8b80-4b72-8f11-3e95f705ad84" />
-<img width="1920" height="1080" alt="Screenshot (151)" src="https://github.com/user-attachments/assets/0bf1468e-1859-44ab-8397-69b17df75e83" />
-<img width="1920" height="1080" alt="Screenshot (152)" src="https://github.com/user-attachments/assets/d09d7191-0187-4b20-bbfb-0fba13ba57f7" />
-<img width="1920" height="1080" alt="Screenshot (153)" src="https://github.com/user-attachments/assets/064fcb55-251b-46e1-8581-a9b64312fa7c" />
-<img width="1920" height="1080" alt="Screenshot (154)" src="https://github.com/user-attachments/assets/25b5d2f6-e3f1-4179-af88-a3e72bec249b" />
-<img width="1920" height="1080" alt="Screenshot (155)" src="https://github.com/user-attachments/assets/1849bb93-ed14-4c45-bee1-752fdbb284aa" />
-<img width="1920" height="1080" alt="Screenshot (156)" src="https://github.com/user-attachments/assets/35fcef4f-c372-4129-bdaa-bd1912a4f21c" />
-<img width="1920" height="1080" alt="Screenshot (157)" src="https://github.com/user-attachments/assets/4940cfe8-1c73-497d-8947-3aa65970b9e4" />
-<img width="1920" height="1080" alt="Screenshot (158)" src="https://github.com/user-attachments/assets/31d6d893-708a-4d4f-860e-24b9d93a95f0" />
-<img width="1920" height="1080" alt="Screenshot (159)" src="https://github.com/user-attachments/assets/4b2cd175-d025-463f-8968-9a338d556e60" />
-<img width="1920" height="1080" alt="Screenshot (160)" src="https://github.com/user-attachments/assets/d0e6e79e-cc16-4ad5-85e9-e36d21592e19" />
-<img width="1920" height="1080" alt="Screenshot (161)" src="https://github.com/user-attachments/assets/c478a76f-1a20-4078-a2e6-d92d8b8f80e5" />
-<img width="1920" height="1080" alt="Screenshot (162)" src="https://github.com/user-attachments/assets/5115d121-a200-45be-b2a7-c7320f969ec5" />
-<img width="1920" height="1080" alt="Screenshot (163)" src="https://github.com/user-attachments/assets/fc25572d-42a5-418c-8b41-ee31eb4f5e30" />
-<img width="1920" height="1080" alt="Screenshot (164)" src="https://github.com/user-attachments/assets/419e8e98-1bc2-4c37-b56d-192c282371b8" />
-<img width="1920" height="1080" alt="Screenshot (165)" src="https://github.com/user-attachments/assets/eb84d955-2808-478b-93e3-f83a7c61edec" />
+**Transform**
+- Rotate left / right (90°)
+- Flip horizontal (mirror) and vertical (upside down)
 
----
+**Filters**
+- Grayscale (B/W) with round-trip back to color
+- Color boost (enhanced saturation)
+- Blur and Sharpen
 
-## 🧰 Requirements
+**Adjustments**
+- Brightness slider (−50 to +50)
+- Contrast slider (−50 to +50)
 
-| Requirement | Minimum Version |
-|-------------|-----------------|
-| Python      | 3.7+            |
-| PyQt5       | 5.15+           |
-| Pillow      | 8.0+            |
+**Effects**
+- Sepia tone
+- Solarize
+- Invert Colors
+- Vignette (radial darkening)
 
-> Tested on **Windows 10/11**, **macOS 13**, and **Ubuntu 22.04**.
+**Crop**
+- Draw a freehand crop rectangle directly on the canvas
+- Rule-of-thirds grid overlay while cropping
+- Hold **Shift** to constrain to a square
+- Live pixel-dimension badge
+- Corner and edge handles
 
----
+**Undo / Reset**
+- Up to 20 levels of undo history
+- One-click reset back to the original image
 
-## 📦 Installation
+**Preview Mode**
+- Non-destructive filter preview via a dropdown — Original, B/W, Color, Blur, Sharpen, Sepia, Solarize, Invert Colors
 
-### Method 1:
+**Save**
+- Export as PNG or JPEG to any location
 
-Installing the .exe file from the releases...
+**Themes — 5 built-in**
 
->Note :
->Note that the code is not signed so the windows defender can show you a warning when you first run the .exe file
+| Theme | Style |
+|---|---|
+| ⬛ Midnight Gold | Dark with gold accents |
+| 🌆 Cyberpunk | Dark neon cyan |
+| 🌲 Forest | Dark green |
+| 🌸 Peach Bloom | Light warm peach |
+| 📜 Sepia | Light vintage brown |
 
-### Method 2:
+Theme preference is saved and restored automatically between sessions.
 
-Manual running:
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Nikhil00437/PIXEDIT-image-editor.git
-cd PIXEDIT-image-editor
-````
-
-> (Optional) Create and activate a virtual environment:
-
-```bash
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# macOS / Linux
-source venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
+**Keyboard Shortcuts**
+- Fully customisable via the Settings panel (⚙ in the title bar)
+- Shortcuts saved to `settings.json` and persist across sessions
+- Conflict detection prevents duplicate bindings
 
 ---
 
-## ▶️ Running the Editor
-
-```bash
-python app.py
-```
-
-After launching, the editor window opens and allows you to browse, edit, and save images.
-
----
-
-## 🧭 Usage Walk-through
-
-1. **Open a Folder** – Pick a directory with `.jpg`, `.jpeg`, or `.png` files.
-2. **Load an Image** – Select an image to display it.
-3. **Apply Transformations** –
-
-   * Rotate left/right
-   * Mirror horizontally/vertically
-4. **Filters & Adjustments** –
-
-   * Grayscale, blur, sharpen
-   * Brightness & contrast sliders
-5. **Crop** – Click *Crop*, drag to select, then confirm.
-6. **Undo/Redo** – Step back through edits.
-7. **Save** – Export work as PNG or JPEG.
-
----
-
-## 📁 Project Structure
+## 🗂️ Project Structure
 
 ```
 PIXEDIT-image-editor/
-├── app.py            # Main application entry point
-├── Crop.py           # Rubber-band cropping widget
-├── functions.py      # Core image logic (Pillow + history)
-├── requirements.txt  # Python dependencies
-├── README.md         # This documentation
+├── app.py          # UI layout, theming, wiring
+├── functions.py    # ImageEditor logic, SettingsWindow, shortcuts, filters
+├── crop2.py        # CropLabel — custom QLabel with rubber-band crop overlay
+├── requirements.txt
+└── LICENSE.txt
 ```
 
 ---
 
-## 🚧 Future Enhancements
+## 🚀 Getting Started
 
-Potential improvements include:
+### Prerequisites
 
-* ⌨️ Keyboard shortcuts for common actions
-* ⚡ Batch processing for multiple images
-* 📸 New filters (e.g., edge detection, color curves)
-* 📐 Advanced resizing and aspect-ratio tools
+- Python 3.8 or higher
 
----
+### Installation
 
-## 🤝 Contributing
+```bash
+# 1. Clone the repository
+git clone https://github.com/Nikhil00437/PIXEDIT-image-editor.git
+cd PIXEDIT-image-editor
 
-1. Fork the repo
-2. Create a feature branch
+# 2. Install dependencies
+pip install -r requirements.txt
 
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. Implement and test your changes
-4. Commit and push
+# 3. Run the app
+python app.py
+```
 
-   ```bash
-   git commit -am "Add feature"
-   git push origin feature/YourFeature
-   ```
-5. Open a Pull Request
+### Requirements
 
-Please follow PEP-8 style guidelines and update this README as needed.
+```
+PyQt5
+Pillow
+```
 
 ---
 
-## 📜 License
+## ⌨️ Default Keyboard Shortcuts
 
-This project is released under the **MIT License**. See the `LICENSE` file for details.
+| Action | Shortcut |
+|---|---|
+| Open Folder | `Ctrl+O` |
+| Save | `Ctrl+S` |
+| Undo | `Ctrl+Z` |
+| Reset | `Ctrl+R` |
+| Left Rotate | `←` |
+| Right Rotate | `→` |
+| Flip Horizontal | `H` |
+| Flip Vertical | `V` |
+| Grayscale | `G` |
+| Color | `C` |
+| Blur | `B` |
+| Sharpen | `Shift+S` |
+| Brightness | `Ctrl+B` |
+| Contrast | `Ctrl+T` |
+| Sepia | `Ctrl+E` |
+| Invert | `Ctrl+I` |
+| Solarize | `Shift+O` |
+| Start Crop | `Ctrl+X` |
+| Confirm Crop | `Enter` |
+
+All shortcuts can be reassigned in **Settings → Shortcuts**.
 
 ---
 
-✨ *Thanks for checking out PIXEDIT — Image Editor!* 🎉
+## 🎨 Theming
+
+Themes are defined in `app.py` as parameterised stylesheet functions (`dark_theme` / `light_theme`). To add a custom theme, add a new entry to the `THEMES` dictionary following the same pattern and it will automatically appear in the Settings → Theme dropdown.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE.txt).
+
+---
+
+Made with 🫡 by [Nikhil](https://github.com/Nikhil00437)
