@@ -4,6 +4,7 @@ from PyQt5.QtGui import QPixmap, QKeySequence
 import os, tempfile, json, math
 from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 from collections import deque
+from generate_image import ImageGenerator
 
 # Default shortcuts
 DEFAULT_SHORTCUTS = {
@@ -289,6 +290,9 @@ class ImageEditor:
         self.file_location   = ""
         self.active_shortcuts = []
         self.current_shortcuts = load_shortcuts()
+        self.image_gen       = ImageGenerator()
+        self.path            = None
+        self.image           = None
 
     # Shortcut management
     def _action_map(self):
@@ -596,3 +600,11 @@ class ImageEditor:
         }
         if text in mapping:
             self._display_pil(mapping[text]())
+            
+    def generate_img(self, prompt: str = None):
+        if not prompt: return
+        self.path = f"{prompt}.png"
+        self.image_gen.generate(prompt, self.path)
+        self.original = Image.open(self.path).copy()
+        self.edited = self.original.copy()
+        self._display_pil(self.edited)
