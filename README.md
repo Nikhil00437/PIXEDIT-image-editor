@@ -1,4 +1,4 @@
-# PIXEDIT — Image Editor 🖼️
+# PIXEDIT — Image Editor
 
 > A clean, themeable desktop image editor built with Python, PyQt5, and Pillow.
 
@@ -15,19 +15,19 @@
 
 ---
 
-## ✨ Features
+## Features
 
 **Image Loading**
-- Browse and load images from any folder via a file picker or drag & drop directly onto the canvas
+- Browse and load images via a file picker or drag & drop onto the canvas
 - Supports `.jpg`, `.jpeg`, and `.png` formats
 - Sidebar file list for quick navigation between images
 
 **Transform**
 - Rotate left / right (90°)
-- Flip horizontal (mirror) and vertical (upside down)
+- Flip horizontal and vertical
 
 **Filters**
-- Grayscale (B/W) with round-trip back to color
+- Grayscale with round-trip back to color
 - Color boost (enhanced saturation)
 - Blur and Sharpen
 
@@ -50,10 +50,15 @@
 
 **Undo / Reset**
 - Up to 20 levels of undo history
-- One-click reset back to the original image
+- One-click reset to the original image
 
 **Preview Mode**
 - Non-destructive filter preview via a dropdown — Original, B/W, Color, Blur, Sharpen, Sepia, Solarize, Invert Colors
+
+**Image Generation**
+- Generate images from text prompts using Stable Diffusion 2.1
+- Auto-detects CUDA GPU — falls back to CPU if unavailable
+- Saves output directly to disk with a safe, prompt-derived filename
 
 **Save**
 - Export as PNG or JPEG to any location
@@ -77,24 +82,25 @@ Theme preference is saved and restored automatically between sessions.
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 PIXEDIT-image-editor/
-├── app.py          # UI layout, theming, wiring
-├── functions.py    # ImageEditor logic, SettingsWindow, shortcuts, filters
-├── crop2.py        # CropLabel — custom QLabel with rubber-band crop overlay
+├── app.py              # UI layout, theming, event wiring
+├── functions.py        # ImageEditor logic, SettingsWindow, filters, shortcuts
+├── Crop.py             # CropLabel — custom QLabel with rubber-band crop overlay
+├── generate_image.py   # Stable Diffusion 2.1 image generation — text-to-image via diffusers, auto-detects CUDA/CPU
 ├── requirements.txt
 └── LICENSE.txt
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.8+
 
 ### Installation
 
@@ -115,11 +121,15 @@ python app.py
 ```
 PyQt5
 Pillow
+torch
+diffusers
 ```
+
+> For image generation (`generate_image.py`), a CUDA-capable GPU is recommended. The module will fall back to CPU automatically but generation will be significantly slower.
 
 ---
 
-## ⌨️ Default Keyboard Shortcuts
+## Default Keyboard Shortcuts
 
 | Action | Shortcut |
 |---|---|
@@ -147,15 +157,23 @@ All shortcuts can be reassigned in **Settings → Shortcuts**.
 
 ---
 
-## 🎨 Theming
+## Theming
 
-Themes are defined in `app.py` as parameterised stylesheet functions (`dark_theme` / `light_theme`). To add a custom theme, add a new entry to the `THEMES` dictionary following the same pattern and it will automatically appear in the Settings → Theme dropdown.
+Themes are defined in `app.py` as parameterised stylesheet functions (`dark_theme` / `light_theme`). To add a custom theme, add a new entry to the `THEMES` dictionary following the same pattern — it will appear automatically in **Settings → Theme**.
 
 ---
 
-## 📄 License
+## Related Projects
 
-This project is licensed under the [MIT License](LICENSE.txt).
+- [ARIA — Local AI Desktop Assistant](https://github.com/Nikhil00437/ARIA) — 15-module PyQt5 AI assistant with LM Studio, Stable Diffusion, and voice engine
+- [RAG Chatbot](https://github.com/Nikhil00437/cap) — Verified-document RAG chatbot with FastAPI
+- [Qwen3-4B Excel Fine-Tune](https://huggingface.co/Nikhil1581/qwen3-4b-instruct-2507.Q4_K_M-excel-finetuning-1.2kdataset) — GGUF model on HuggingFace
+
+---
+
+## License
+
+MIT — see [LICENSE.txt](LICENSE.txt)
 
 ---
 
