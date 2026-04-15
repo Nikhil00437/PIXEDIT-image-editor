@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QHBoxLayout, QSlider, QGroupBox, QListWidget, QLabel, QVBoxLayout, QPushButton, QComboBox, QListWidgetItem
 from PyQt5.QtCore import Qt
 import os, sys
-from crop2 import CropLabel
+from crop import CropLabel
 from functions import ImageEditor, load_theme_from_file
 from theme import THEMES
 
@@ -156,7 +156,125 @@ slider2.setRange(-50, 50)
 vbox2 = QVBoxLayout(); vbox2.addWidget(slider2)
 contrast.setLayout(vbox2)
 
-for w in [folder, widget, divider("PREVIEW"), preview, divider("TRANSFORM"), left_rotate, right_rotate, flip_horizontal, flip_vertical, divider("FILTERS"), grayscale, color, blur, sharpen, divider("ADJUST"), brightness, contrast, divider("EFFECTS"), sepia, solarize, invert, vignette]:
+# ========== NEW SLIDERS ==========
+# Saturation
+saturation = QGroupBox("SATURATION")
+slider_saturation = QSlider(Qt.Horizontal)
+slider_saturation.setFocusPolicy(Qt.StrongFocus)
+slider_saturation.setTickPosition(QSlider.TicksBothSides)
+slider_saturation.setTickInterval(25)
+slider_saturation.setSingleStep(5)
+slider_saturation.setRange(-100, 100)
+vbox_sat = QVBoxLayout(); vbox_sat.addWidget(slider_saturation)
+saturation.setLayout(vbox_sat)
+
+# Hue
+hue_adjust = QGroupBox("HUE")
+slider_hue = QSlider(Qt.Horizontal)
+slider_hue.setFocusPolicy(Qt.StrongFocus)
+slider_hue.setTickPosition(QSlider.TicksBothSides)
+slider_hue.setTickInterval(30)
+slider_hue.setSingleStep(5)
+slider_hue.setRange(-180, 180)
+vbox_hue = QVBoxLayout(); vbox_hue.addWidget(slider_hue)
+hue_adjust.setLayout(vbox_hue)
+
+# Temperature
+temperature = QGroupBox("TEMPERATURE")
+slider_temperature = QSlider(Qt.Horizontal)
+slider_temperature.setFocusPolicy(Qt.StrongFocus)
+slider_temperature.setTickPosition(QSlider.TicksBothSides)
+slider_temperature.setTickInterval(20)
+slider_temperature.setSingleStep(5)
+slider_temperature.setRange(-100, 100)
+vbox_temp = QVBoxLayout(); vbox_temp.addWidget(slider_temperature)
+temperature.setLayout(vbox_temp)
+
+# ========== ZOOM CONTROLS ==========
+zoom_controls = QGroupBox("ZOOM")
+zoom_layout = QVBoxLayout()
+
+zoom_row1 = QHBoxLayout()
+zoom_out_btn = QPushButton("−")
+zoom_out_btn.setFixedWidth(30)
+zoom_slider = QSlider(Qt.Horizontal)
+zoom_slider.setRange(25, 400)
+zoom_slider.setValue(100)
+zoom_in_btn = QPushButton("+")
+zoom_in_btn.setFixedWidth(30)
+zoom_row1.addWidget(zoom_out_btn)
+zoom_row1.addWidget(zoom_slider)
+zoom_row1.addWidget(zoom_in_btn)
+
+zoom_row2 = QHBoxLayout()
+fit_button = QPushButton("🔲 Fit")
+fit_button.setObjectName("util_btn")
+zoom_actual_btn = QPushButton("100%")
+zoom_actual_btn.setObjectName("util_btn")
+zoom_row2.addWidget(fit_button)
+zoom_row2.addWidget(zoom_actual_btn)
+zoom_row2.addStretch()
+
+zoom_layout.addLayout(zoom_row1)
+zoom_layout.addLayout(zoom_row2)
+zoom_controls.setLayout(zoom_layout)
+
+# ========== NEW BUTTONS ==========
+left_rotate     = QPushButton("↺  Left Rotate")
+right_rotate    = QPushButton("↻  Right Rotate")
+flip_horizontal = QPushButton("⇆  Mirror")
+flip_vertical   = QPushButton("⇅  Upside Down")
+rotate_free    = QPushButton("◎  Rotate")
+grayscale       = QPushButton("◑  B/W")
+color           = QPushButton("◈  Color")
+blur            = QPushButton("≋  Blur")
+sharpen         = QPushButton("✦  Sharpen")
+sepia           = QPushButton("▮  Sepia")
+invert          = QPushButton("₪  Invert")
+solarize        = QPushButton("●  Solarize")
+vignette        = QPushButton("◌◌  Vignette")
+auto_enhance    = QPushButton("✨  Auto")
+resize_btn     = QPushButton("⤡  Resize")
+resize_btn.setObjectName("util_btn")
+crop_presets_btn = QPushButton("⊞  Crop Presets")
+crop_presets_btn.setObjectName("crop_btn")
+text_btn       = QPushButton("T  Text")
+
+# ========== DRAWING BUTTONS ==========
+brush_btn     = QPushButton("✎  Brush")
+eraser_btn    = QPushButton("◻  Eraser")
+line_btn      = QPushButton("╱  Line")
+arrow_btn     = QPushButton("→  Arrow")
+rect_btn      = QPushButton("□  Rectangle")
+circle_btn    = QPushButton("○  Circle")
+clear_draw   = QPushButton("⌫  Clear Drawing")
+apply_draw  = QPushButton("✓  Apply Drawing")
+apply_draw.setObjectName("save_btn")
+
+# Brush size
+brush_size_group = QGroupBox("BRUSH SIZE")
+brush_slider = QSlider(Qt.Horizontal)
+brush_slider.setRange(1, 30)
+brush_slider.setValue(5)
+brush_size_layout = QVBoxLayout()
+brush_size_layout.addWidget(brush_slider)
+brush_size_group.setLayout(brush_size_layout)
+
+# Color picker
+color_btn = QPushButton("🎨  Color")
+color_btn.setObjectName("util_btn")
+
+# ========== STICKERS ==========
+sticker_star = QPushButton("★  Star")
+sticker_heart = QPushButton("♥  Heart")
+sticker_arrow = QPushButton("↑  Arrow")
+
+# Add all to layout
+for w in [folder, widget, divider("PREVIEW"), preview, divider("TRANSFORM"), left_rotate, right_rotate, flip_horizontal, flip_vertical, rotate_free, divider("FILTERS"), grayscale, color, blur, sharpen, auto_enhance, divider("ADJUST"), brightness, contrast, saturation, hue_adjust, temperature, divider("EFFECTS"), sepia, solarize, invert, vignette, divider("DRAWING"), brush_btn, eraser_btn, line_btn, arrow_btn, rect_btn, circle_btn, brush_size_group, color_btn, clear_draw, apply_draw, divider("STICKERS"), sticker_star, sticker_heart, sticker_arrow, divider("TOOLS"), resize_btn, crop_presets_btn, text_btn, divider("VIEW"), zoom_controls]:
+    vboxmain.addWidget(w)
+
+# Add all to layout
+for w in [folder, widget, divider("PREVIEW"), preview, divider("TRANSFORM"), left_rotate, right_rotate, flip_horizontal, flip_vertical, rotate_free, divider("FILTERS"), grayscale, color, blur, sharpen, auto_enhance, divider("ADJUST"), brightness, contrast, saturation, hue_adjust, temperature, divider("EFFECTS"), sepia, solarize, invert, vignette, divider("TOOLS"), resize_btn, crop_presets_btn, text_btn, divider("VIEW"), zoom_controls]:
     vboxmain.addWidget(w)
 
 # Canvas toolbar (settings_btn removed — now lives in title bar)
@@ -172,8 +290,12 @@ text_box = QLineEdit()
 text_box.setPlaceholderText("A Capybara? Maybe...")
 text_box.setEnabled(False)
 
-from crop2 import CropLabel
 image_label = CropLabel()
+
+# Info bar
+info_bar = QLabel("No image loaded")
+info_bar.setAlignment(Qt.AlignCenter)
+info_bar.setStyleSheet("font-size: 11px; padding: 4px;")
 
 hbox = QHBoxLayout()
 hbox.setSpacing(6)
@@ -190,6 +312,7 @@ hbox.addWidget(save)
 
 vbox2main.addLayout(hbox)
 vbox2main.addWidget(image_label)
+vbox2main.addWidget(info_bar)
 vbox2main.addWidget(footer)
 
 column1.setLayout(vboxmain)
@@ -214,13 +337,25 @@ root_layout.setSpacing(0)
 root_layout.addWidget(title_bar)
 root_layout.addWidget(content)
 
-# Wire up ImageEditor
-main = ImageEditor(widget, image_label, slider, slider2, preview, left_rotate, right_rotate, flip_horizontal, flip_vertical, grayscale, color, blur, sharpen, brightness, contrast, sepia, solarize, invert, vignette, undo, reset_btn, crop_start, crop_confirm, save, main_window, themes=THEMES, current_theme=current_theme, apply_theme_fn=apply_theme)
+# Wire up ImageEditor with new parameters
+main = ImageEditor(widget, image_label, slider, slider2, preview, left_rotate, right_rotate, flip_horizontal, flip_vertical,
+               grayscale, color, blur, sharpen, brightness, contrast, sepia, solarize, invert, vignette,
+               undo, reset_btn, crop_start, crop_confirm, save, main_window,
+               themes=THEMES, current_theme=current_theme, apply_theme_fn=apply_theme,
+               slider_saturation=slider_saturation, slider_hue=slider_hue, slider_temperature=slider_temperature,
+               zoom_slider=zoom_slider, fit_button=fit_button, info_label=info_bar)
 main.setup_shortcuts()
 
 # Disable buttons until an image is loaded
-for w in [preview, left_rotate, right_rotate, flip_horizontal, flip_vertical, grayscale, color, blur, sharpen, brightness, contrast, sepia, solarize, invert, vignette, undo, reset_btn, crop_start, crop_confirm, save]:
-    w.setEnabled(False)
+new_disabled = [preview, left_rotate, right_rotate, flip_horizontal, flip_vertical, rotate_free,
+               grayscale, color, blur, sharpen, brightness, contrast, sepia, solarize, invert, vignette,
+               undo, reset_btn, crop_start, crop_confirm, save, auto_enhance, resize_btn, crop_presets_btn, text_btn,
+               slider_saturation, slider_hue, slider_temperature, zoom_slider, fit_button, zoom_actual_btn,
+               brush_btn, eraser_btn, line_btn, arrow_btn, rect_btn, circle_btn, clear_draw, apply_draw,
+               brush_slider, color_btn, sticker_star, sticker_heart, sticker_arrow]
+for w in new_disabled:
+    if w:
+        w.setEnabled(False)
 
 # Connections
 folder.clicked.connect(main.getfiles)
@@ -259,6 +394,56 @@ reset_btn.clicked.connect(main.reset_)
 save.clicked.connect(main.save_image)
 crop_start.clicked.connect(main.start_crop)
 crop_confirm.clicked.connect(main.confirm_crop)
+
+# New feature signals
+rotate_free.clicked.connect(main.rotate_free_dialog)
+auto_enhance.clicked.connect(main.auto_enhance)
+resize_btn.clicked.connect(main.resize_dialog)
+crop_presets_btn.clicked.connect(main.crop_presets_dialog)
+text_btn.clicked.connect(main.text_overlay_dialog)
+
+# Slider signals
+slider_saturation.sliderReleased.connect(main.saturation_filter)
+slider_hue.sliderReleased.connect(main.hue_filter)
+slider_temperature.sliderReleased.connect(main.temperature_filter)
+
+# Zoom signals
+zoom_in_btn.clicked.connect(main.zoom_in)
+zoom_out_btn.clicked.connect(main.zoom_out)
+zoom_slider.sliderMoved.connect(lambda v: main.set_zoom(v))
+fit_button.clicked.connect(main.fit_to_window)
+zoom_actual_btn.clicked.connect(main.zoom_actual)
+
+# Update info bar after image loads
+widget.currentItemChanged.connect(lambda: main.get_image_info())
+
+# Drawing signals
+brush_btn.clicked.connect(lambda: main.start_drawing_tool("brush"))
+eraser_btn.clicked.connect(lambda: main.start_drawing_tool("eraser"))
+line_btn.clicked.connect(lambda: main.start_drawing_tool("line"))
+arrow_btn.clicked.connect(lambda: main.start_drawing_tool("arrow"))
+rect_btn.clicked.connect(lambda: main.start_drawing_tool("rectangle"))
+circle_btn.clicked.connect(lambda: main.start_drawing_tool("circle"))
+clear_draw.clicked.connect(main.image_label.clear_drawings)
+apply_draw.clicked.connect(main.apply_drawing)
+
+brush_slider.sliderReleased.connect(lambda: main.set_brush_size(brush_slider.value()))
+
+def pick_brush_color():
+    from PyQt5.QtWidgets import QColorDialog
+    color = QColorDialog.getColor()
+    if color.isValid():
+        main.set_brush_color(color)
+
+color_btn.clicked.connect(pick_brush_color)
+
+# Sticker signals
+sticker_star.clicked.connect(lambda: main.add_sticker("star"))
+sticker_heart.clicked.connect(lambda: main.add_sticker("heart"))
+sticker_arrow.clicked.connect(lambda: main.add_sticker("arrow_up"))
+
+# Image label drawing mode - handle clicks to stop
+image_label.mousePressEvent
 
 def prompt_click():
     text_box.setEnabled(True)
